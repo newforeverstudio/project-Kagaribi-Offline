@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KAGARIBI - Official Landing Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Noto+Serif+JP:wght@200;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --obsidian: #0a0a0c;
+            --gold: #c5a059;
+            --gold-light: #e6d5a7;
+            --ink: #1a1a1e;
+            --text-color: #d1d1d6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--obsidian);
+            color: var(--text-color);
+            font-family: 'Cormorant Garamond', serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Language Switcher */
+        .lang-switch {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            display: flex;
+            gap: 1rem;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .lang-switch a {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            background: rgba(10, 10, 12, 0.8);
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            letter-spacing: 0.1rem;
+        }
+
+        .lang-switch a:hover, .lang-switch a.active {
+            background: var(--gold);
+            color: var(--obsidian);
+            box-shadow: 0 0 20px rgba(197, 160, 89, 0.4);
+        }
+
+        .header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background Layer for the Golden Eye Effect */
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(10,10,12,0.8), var(--obsidian)), 
+                        url('kagaribi_social_banner_gold.png');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            opacity: 0.6; /* Default dim state */
+            filter: brightness(0.5) contrast(0.9);
+            transition: all 0.2s ease-in; /* Instant 'Pop' like a fire lighting up */
+        }
+
+        /* Mouseover: The Eye Awakens! */
+        .header:hover::before {
+            opacity: 1;
+            filter: brightness(1.2) contrast(1.2);
+        }
+
+        .title-area {
+            animation: fadeIn 3s ease-in-out;
+            padding: 2rem;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 12vw, 6rem);
+            letter-spacing: 0.8rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            font-family: 'Noto Serif JP', serif;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: default;
+            display: inline-block;
+        }
+
+        /* Title Popup Effect */
+        h1:hover {
+            transform: scale(1.1) translateY(-10px);
+            text-shadow: 0 0 30px rgba(197, 160, 89, 0.8), 0 0 60px rgba(197, 160, 89, 0.4);
+            color: var(--gold-light);
+        }
+
+        .subtitle {
+            font-style: italic;
+            font-size: clamp(1rem, 4vw, 1.5rem);
+            color: var(--gold-light);
+            margin-bottom: 4rem;
+            letter-spacing: 0.2rem;
+        }
+
+        .cta-container {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap; /* Fixed: Allows buttons to wrap on mobile */
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            letter-spacing: 0.15rem;
+            background: rgba(197, 160, 89, 0.05);
+            backdrop-filter: blur(10px);
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            width: auto;
+            min-width: 280px; /* Ensures consistent button size */
+        }
+
+        .cta-button.primary {
+            background: var(--gold);
+            color: var(--obsidian);
+        }
+
+        .cta-button:hover {
+            background: var(--gold-light);
+            color: var(--obsidian);
+            box-shadow: 0 0 40px rgba(197, 160, 89, 0.5);
+            transform: translateY(-5px);
+        }
+
+        .section {
+            padding: clamp(4rem, 10vw, 8.5rem) 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .art-container {
+            display: flex;
+            gap: clamp(2rem, 5vw, 5rem);
+            align-items: center;
+            margin-bottom: 6rem;
+            flex-wrap: wrap; /* For Responsive Stacking */
+        }
+
+        .art-image {
+            flex: 0 1 480px; /* Do not grow, but allow shrink */
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            display: block;
+            box-shadow: 0 30px 60px rgba(0,0,0,1);
+            border: 1px solid rgba(197,160,89,0.25);
+            transition: transform 0.5s ease;
+            object-fit: contain; /* Ensures aspect ratio is never lost */
+        }
+
+        .art-image:hover {
+            transform: scale(1.02);
+        }
+
+        .art-text {
+            flex: 1 1 400px;
+        }
+
+        .art-text h2 {
+            font-size: clamp(1.8rem, 6vw, 3rem);
+            color: var(--gold);
+            margin-bottom: 2.5rem;
+            line-height: 1.2;
+        }
+
+        .story-section {
+            background: var(--ink);
+            padding: clamp(2rem, 6vw, 5rem);
+            border-left: 4px solid var(--gold);
+            position: relative;
+            margin-bottom: 5rem;
+        }
+
+        .footer {
+            padding: 8rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid rgba(197, 160, 89, 0.2);
+            font-size: 1rem;
+            color: white;
+            letter-spacing: 0.1rem;
+        }
+
+        .footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(10,10,12,0.9), transparent), 
+                        url('kagaribi_social_banner_gold.png');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            opacity: 0.8;
+            filter: brightness(0.6) grayscale(20%);
+            transition: all 0.3s ease-in;
+        }
+
+        .footer:hover::before {
+            opacity: 1;
+            filter: brightness(1.2) grayscale(0%);
+            box-shadow: inset 0 0 100px rgba(197, 160, 89, 0.4);
+        }
+
+        .footer p {
+            position: relative;
+            z-index: 5;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .footer:hover p {
+            transform: translateY(-5px) scale(1.1);
+            text-shadow: 0 0 20px white;
+            color: white;
+        }
+
+        /* Creator Section (The B-Side Hub) */
+        .creator-section {
+            background: linear-gradient(to bottom, var(--obsidian), #15151a);
+            padding: 8rem 2rem;
+            text-align: center;
+            border-top: 2px solid var(--gold);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+        }
+
+        .creator-quote {
+            font-family: 'Noto Serif JP', serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: var(--gold-light);
+            margin-bottom: 3rem;
+            line-height: 1.6;
+            letter-spacing: 0.2rem;
+        }
+
+        .canva-link-button {
+            display: inline-block;
+            padding: 1.5rem 4rem;
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 1.2rem;
+            letter-spacing: 0.3rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .canva-link-button:hover {
+            background: var(--gold);
+            color: var(--obsidian);
+            box-shadow: 0 0 50px rgba(197, 160, 89, 0.5);
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Enhanced Mobile Responsiveness */
+        @media (max-width: 850px) {
+            .header {
+                padding: 4rem 1rem;
+            }
+            .art-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .art-text {
+                margin-top: 2rem;
+            }
+            .story-section {
+                border-left: none;
+                border-top: 4px solid var(--gold);
+            }
+            .cta-button {
+                width: 100%;
+                min-width: unset;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lang-switch">
+        <a href="index.html">JP</a>
+        <a href="en.html" class="active">EN</a>
+    </div>
+
+    <header class="header">
+        <div class="title-area">
+            <h1>篝 焔</h1>
+            <p class="subtitle">KAGARIBI - THE WATCHFIRE OF MEMORIES</p>
+            <div class="cta-container">
+                <a href="https://store.steampowered.com/app/4323550/" class="cta-button">Play Free Demo</a>
+                <a href="https://store.steampowered.com/app/4323550/" class="cta-button primary">Buy Now on Steam</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="section art-container">
+        <img src="kagaribi_main_visual.png" alt="KAGARIBI Main Visual" class="art-image">
+        <div class="art-text">
+            <h2>Reclaim your name.<br>Unravel the stolen memories.</h2>
+            <p>
+                The fire remembers what I have buried so deep.<br><br>
+                Wander through the haunting shadows of Taisho Gothic architecture in this psychological horror experience. Born from "Vibe Coding"—a singular resonance between a creator and AI—a beautiful yet cruel narrative now unfolds.
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="story-section">
+            <p>
+                "It is not that I have forgotten. I have merely buried it so deep... so that I would never have to remember."<br><br>
+                KAGARIBI is the soul-imprint of a first-time developer who began this journey at the age of 57. A prayer bound by the sacred number "7," connecting three generations—mother, creator, and daughter.
+            </p>
+        </div>
+        <div style="margin-top: 5rem; text-align: center;">
+            <img src="kagaribi_gameplay_en.png" alt="KAGARIBI Gameplay" style="width: 100%; max-width: 800px; box-shadow: 0 0 50px rgba(0,0,0,1); border: 1px solid rgba(197,160,89,0.3);">
+            <p style="margin-top: 2rem; color: var(--gold-light);">Karma and Sanity. Your choices will illuminate or darken the path of memories.</p>
+        </div>
+    </div>
+
+    <div class="creator-section">
+        <p class="creator-quote">Connect this deepening of the abyss to real value,<br>and evolve all Steam developers.</p>
+        <a href="https://canva.link/kagaribi" class="canva-link-button">ENTER THE CANVA LIBRARY</a>
+        <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.6; color: var(--gold);">For Creators & Developers</p>
+    </div>
+
+    <footer class="footer">
+        <p>© 2026 NewForever STUDIO</p>
+    </footer>
+
+</body>
+</html>
